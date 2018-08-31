@@ -1018,7 +1018,7 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
                     {
                         RenderDebugViewMaterial(m_CullResults, hdCamera, renderContext, cmd);
 
-                        PushColorPickerDebugTexture(cmd, m_CameraColorBuffer, hdCamera);
+                        PushColorPickerDebugTexture(hdCamera, cmd, m_CameraColorBuffer);
                     }
                     else
                     {

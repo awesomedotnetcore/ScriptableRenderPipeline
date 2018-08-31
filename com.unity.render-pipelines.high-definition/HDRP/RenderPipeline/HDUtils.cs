@@ -315,7 +315,7 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
         // Returns mouse coordinates: (x,y) in pixels and (z,w) normalized inside the render target (not the viewport)
         public static Vector4 GetMouseCoordinates(HDCamera camera)
         {
-            Vector2 mousePixelCoord = MousePositionDebug.instance.GetMousePosition(camera.screenSize.y);
+            Vector2 mousePixelCoord = MousePositionDebug.instance.GetMousePosition(camera.screenSize.y, camera.camera.cameraType == CameraType.SceneView);
             return new Vector4(mousePixelCoord.x, mousePixelCoord.y, camera.viewportScale.x * mousePixelCoord.x / camera.screenSize.x, camera.viewportScale.y * mousePixelCoord.y / camera.screenSize.y);
         }
 

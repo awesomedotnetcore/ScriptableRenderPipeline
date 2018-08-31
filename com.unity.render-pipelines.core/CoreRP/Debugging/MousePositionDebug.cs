@@ -132,17 +132,29 @@ namespace UnityEngine.Experimental.Rendering
 #endif
         }
 
-        public Vector2 GetMousePosition(float ScreenHeight)
+        public Vector2 GetMousePosition(float ScreenHeight, bool sceneView)
         {
-            Vector2 mousePixelCoord = Input.mousePosition;
 #if UNITY_EDITOR
-            if (!UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode)
+            if (sceneView)
             {
-                mousePixelCoord = m_mousePosition;
+                Vector2 mousePixelCoord = m_mousePosition;
                 mousePixelCoord.y = (ScreenHeight - 1.0f) - mousePixelCoord.y;
+                return mousePixelCoord;
             }
+            else
+            {
+                if(EditorApplication.isPlayingOrWillChangePlaymode)
+                {
+                    return Input.mousePosition;
+                }
+                else
+                {
+                    return new Vector2(-1.0f, -1.0f);
+                }
+            }
+#else
+            return Input.mousePosition;
 #endif
-            return mousePixelCoord;
         }
 
         public Vector2 GetMouseClickPosition(float ScreenHeight)
